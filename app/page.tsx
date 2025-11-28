@@ -159,7 +159,7 @@ export default function Home() {
       <div className="max-w-6xl mx-auto">
         {/* PWA Status Indicator */}
         <div className="mb-4 flex justify-between items-center">
-          <h1 className="text-3xl font-bold">Down Detector</h1>
+          <h1 className="text-3xl font-bold text-black">Down Detector</h1>
           {isStandalone && (
             <div className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">
               📱 PWA Mode
@@ -169,7 +169,7 @@ export default function Home() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">{/* List Web Section */}
           <div>
-            <h2 className="text-2xl font-bold mb-4">List Web</h2>
+            <h2 className="text-2xl font-bold mb-4 text-black">List Web</h2>
             <div className="mb-6 flex gap-2">
               <input
                 type="text"
@@ -214,7 +214,7 @@ export default function Home() {
                       />
                     ) : (
                       <div className="flex-1">
-                        <span className={website.isActive ? '' : 'text-red-600 font-semibold'}>
+                        <span className={website.isActive ? 'text-green-600 font-semibold' : 'text-red-600 font-semibold'}>
                           {website.domain}
                         </span>
                         <span className={`ml-3 text-sm font-medium ${website.isActive ? 'text-green-600' : 'text-red-600'}`}>
@@ -244,7 +244,7 @@ export default function Home() {
 
           {/* Người phụ trách Section */}
           <div>
-            <h2 className="text-2xl font-bold mb-4">Người phụ trách</h2>
+            <h2 className="text-2xl font-bold mb-4 text-black">Người phụ trách</h2>
             <div className="mb-6">
               <button
                 onClick={() => openAdminPopup()}
@@ -260,9 +260,9 @@ export default function Home() {
                   className="flex justify-between items-start py-3 border-b"
                 >
                   <div className="flex-1">
-                    <div className="font-bold text-lg">{admin.name}</div>
-                    <div className="text-gray-700">{admin.phoneNumber}</div>
-                    <div className="text-gray-600 text-sm">{admin.email}</div>
+                    <div className="font-bold text-lg text-black">{admin.name}</div>
+                    <div className="text-black">{admin.phoneNumber}</div>
+                    <div className="text-black text-sm">{admin.email}</div>
                   </div>
                   <div className="flex gap-2">
                     <button
