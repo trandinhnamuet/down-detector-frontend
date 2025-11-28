@@ -111,9 +111,10 @@ export function usePushNotifications(adminId: number | null) {
       const registration = await navigator.serviceWorker.ready;
 
       // Subscribe to push notifications
+      const appServerKey = urlBase64ToUint8Array(publicKey);
       const subscription = await registration.pushManager.subscribe({
         userVisibleOnly: true,
-        applicationServerKey: urlBase64ToUint8Array(publicKey) as Uint8Array,
+        applicationServerKey: appServerKey.buffer.slice(0) as ArrayBuffer,
       });
 
       // Send subscription to backend
@@ -225,11 +226,17 @@ function urlBase64ToUint8Array(base64String: string): Uint8Array {
     .replace(/\-/g, '+')
     .replace(/_/g, '/');
 
-  const rawData = window.atob(base64);
+  const rawData = globalThis.atob(base64);
   const outputArray = new Uint8Array(rawData.length);
 
   for (let i = 0; i < rawData.length; ++i) {
     outputArray[i] = rawData.charCodeAt(i);
   }
-  return outputArray;
+  
+  // Create a new ArrayBuffer and copy data to ensure correct type
+  const buffer = new ArrayBuffer(outputArray.length);
+  const result = new Uint8Array(buffer);
+  result.set(outputArray);
+  
+  return result;
 }
